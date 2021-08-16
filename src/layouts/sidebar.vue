@@ -15,7 +15,7 @@
 <script lang="ts">
   import { defineComponent, computed } from 'vue'
   import { useRoute } from 'vue-router'
-  import SiderItem from './siderItem.vue'
+  import SiderItem, { MenuProp } from './siderItem.vue'
   import { routes } from '../router'
 
   export default defineComponent({
@@ -23,6 +23,17 @@
       SiderItem,
     },
     setup() {
+      // 过滤非菜单栏
+      const filterMenus = (arr: Record<string, any>[]) => {
+        return arr.filter(item => !item.meta?.isNotMenu).map(item => {
+          if (item.children) {
+            item.children = filterMenus(item.children)
+          }
+          return item
+        })
+      }
+      const menus = filterMenus(routes) as MenuProp[]
+
       const route = useRoute()
       const activeName = computed(() => {
         const { name, meta } = route
@@ -33,16 +44,6 @@
         return name
       })
 
-      // 过滤非菜单栏
-      const filterMenus = (arr: Record<string, any>[]) => {
-        return arr.filter(item => !item.meta?.isNotMenu).map(item => {
-          if (item.children) {
-            item.children = filterMenus(item.children)
-          }
-          return item
-        })
-      }
-      const menus = filterMenus(routes)
       return { menus, activeName }
     }
   })

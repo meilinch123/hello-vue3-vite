@@ -2,7 +2,7 @@
   <h3>Home页</h3>
   <img alt="Vue logo" src="@/assets/logo.png">
   <hello-world msg="Hello Vue 3 + TypeScript + Vite" />
-  <router-link to="/detail">Go to Detail</router-link>
+  <router-link to="/home/detail">Go to Detail</router-link>
   <p>Vuex-count: {{ count }}</p>
 </template>
 

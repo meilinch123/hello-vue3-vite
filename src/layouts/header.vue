@@ -4,7 +4,7 @@
     <div class="right-menu">
       <el-dropdown>
         <span class="el-dropdown-link">
-          嘻嘻嘻<i class="el-icon-arrow-down el-icon--right" />
+          {{ name }}<i class="el-icon-arrow-down el-icon--right" />
         </span>
         <template #dropdown>
           <el-dropdown-menu>
@@ -16,12 +16,21 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import Logo from './logo.vue'
+import request from '../utils/request'
 
 export default defineComponent({
   components: {
     Logo,
+  },
+
+  setup() {
+    const name = ref(null)
+    request.get('/api/getUser').then((res: any) => {
+      name.value = res.name
+    })
+    return { name }
   }
 })
 </script>

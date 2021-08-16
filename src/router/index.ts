@@ -3,6 +3,11 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 export const routes: RouteRecordRaw[] = [
   {
     path: '/',
+    redirect: '/home/list',
+    meta: { title: '导航', icon: '', isNotMenu: true },
+  },
+  {
+    path: '/home',
     name: 'Home',
     meta: {
       title: '我的首页',

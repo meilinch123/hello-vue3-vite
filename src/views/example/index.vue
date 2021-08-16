@@ -25,7 +25,7 @@
         <el-button
           size="mini"
           type="danger"
-          @click="handleDelete(scope.$index, scope.row)"
+          @click="handleDelete(scope.$index)"
         >
           删除
         </el-button>

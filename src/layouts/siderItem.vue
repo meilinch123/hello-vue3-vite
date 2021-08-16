@@ -14,7 +14,7 @@
       </el-submenu>
       <el-menu-item
         v-else
-        :key="item.path"
+        :key="item.name"
         :index="item.name"
         @click="trigger(item)"
       >
@@ -25,14 +25,24 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue'
+  import { defineComponent, PropType } from 'vue'
   import { useRouter, useRoute } from 'vue-router'
+
+  export interface MenuProp {
+    name: string;
+    path: string;
+    meta: {
+      title: string;
+      icon: string;
+    };
+    children?:[];
+  }
 
   export default defineComponent({
     name: 'SiderItem',
     props: {
       menuList: {
-        type: Array,
+        type: [] as PropType<Array<MenuProp>>,
         default: () => []
       }
     },
