@@ -6,6 +6,7 @@
   <p>Vuex-count: {{ count }}</p>
 </template>
 
+<!--
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
 import { useStore } from 'vuex'
@@ -22,4 +23,12 @@ export default defineComponent({
   }
 })
 </script>
+-->
+<script setup>
+  import { computed } from 'vue'
+  import { useStore } from 'vuex'
+  import HelloWorld from 'comps/HelloWorld.vue'
 
+  const store = useStore()
+  const count = computed(() => store.state.count)
+</script>
